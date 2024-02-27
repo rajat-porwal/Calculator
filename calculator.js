@@ -8,7 +8,14 @@ let result = null;
 let evaluated = false;    // stuck at how to reset the display back to 0 after evaluation, key is to set a flag to true or false
 
 let operatorList = ['/', '*', '+', '-', '=']
+/*
 
+to do :
+operators if change display append to that
+delete button to remove the last value
+clear button to clear display
+
+*/
 
 /*
 getElementByClassName on this button
@@ -46,10 +53,12 @@ buttons.addEventListener('click', (event) => {      //eventDelegation instead of
                 display.value = result;
                 operand1 = result;
                 operator = event.target.innerHTML;
+                displayAppendValue(event.target.innerHTML);
             }
 
             else{
                 operator = event.target.innerHTML;
+                displayAppendValue(event.target.innerHTML);      // MODIFIY THIS CODE TO MAKE OPERATORS CHANGE VALUE LATER BY WRITING A NEW FUNCTION
             }
             // operand2 = parseInt(clickedInput.join(''));
             // clickedInput.length = 0;
@@ -62,14 +71,12 @@ buttons.addEventListener('click', (event) => {      //eventDelegation instead of
         }
 
         operator = event.target.innerHTML;
-        
+
         if((operand1 === undefined)){                       //the first initial input to operand 1 
             operand1 = parseInt(clickedInput.join(''));
-            clickedInput.length = 0; 
-        }
-        
-                                   //RESET THE CLICKED ARRAY
-        displayAppendValue(event.target.innerHTML);
+            clickedInput.length = 0;                        //RESET THE CLICKED ARRAY
+            displayAppendValue(event.target.innerHTML);
+        }                            
     }  
 
     if(event.target.className === 'calculate'){
@@ -171,7 +178,12 @@ function division(numerator, denominator){
     if( !( denominator == 0 || isNaN(denominator) ) ){             // condition for denominator to be not Zero or NaN
         return numerator / denominator;
     }
-    else return null;
+
+    else {
+
+       return  display.value = 'you snarky lil minion why you wanna crash my calc';
+        // return null;  
+    }
 }
 
 function operate(operand1, operator, operand2){                   // function to call arithmetic function as per operator

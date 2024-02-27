@@ -4,8 +4,8 @@ let display = document.querySelector('#display');
 
 let operand1, operand2, operator = null;
 let clickedInput = [];
-let result = 0;
-let evaluated = false;
+let result = null;
+let evaluated = false;    // stuck at how to reset the display back to 0 after evaluation, key is to set a flag to true or false
 
 let operatorList = ['/', '*', '+', '-', '=']
 
@@ -34,10 +34,41 @@ buttons.addEventListener('click', (event) => {      //eventDelegation instead of
 
     
     if(event.target.className === 'oprtrBtn'){
+        
+        if( !(operand1 === undefined)){     
+                        // for when i want a string of operations to be calculated
+            if(!( (clickedInput.length) === 0) ){
+
+                operand2 = parseInt(clickedInput.join(''));
+                clickedInput.length = 0;
+                result = operate(operand1, operator, operand2);
+                console.log(operator);
+                display.value = result;
+                operand1 = result;
+                operator = event.target.innerHTML;
+            }
+
+            else{
+                operator = event.target.innerHTML;
+            }
+            // operand2 = parseInt(clickedInput.join(''));
+            // clickedInput.length = 0;
+            
+            // result = operate(operand1, operator, operand2);
+            // console.log(operator);
+            // display.value = result;
+            // operand1 = result;
+            // operator = event.target.innerHTML;
+        }
 
         operator = event.target.innerHTML;
-        operand1 = parseInt(clickedInput.join(''));
-        clickedInput.length = 0;                            //RESET THE CLICKED ARRAY
+        
+        if((operand1 === undefined)){                       //the first initial input to operand 1 
+            operand1 = parseInt(clickedInput.join(''));
+            clickedInput.length = 0; 
+        }
+        
+                                   //RESET THE CLICKED ARRAY
         displayAppendValue(event.target.innerHTML);
     }  
 
@@ -52,8 +83,8 @@ buttons.addEventListener('click', (event) => {      //eventDelegation instead of
         evaluated = true;
     }
 
-    console.table(operand1, operand2, operator, clickedInput);  
-    console.log(result);
+    // console.table(operand1, operand2, operator, clickedInput);  
+    // console.log(result);
 
 
     
@@ -102,14 +133,20 @@ function displayAppendValue (elem) {
         evaluated = false;
     }
 
-    
-     if (display.value === "0") {               //new code when i want initially the display to show 0
-            display.value = elem;
-        } 
-        
-        else {
+    if (display.value === "0" ) {   
+                    //new code when i want initially the display to show 0
+        if(result === 0){
             display.value += elem;
         }
+        else{
+            display.value = elem;
+
+        }
+    } 
+        
+    else {
+        display.value += elem;
+    }
 
     
 

@@ -32,3 +32,20 @@ body {
     gap: 10px;
     margin-top: 20px;
 }
+
+button {
+    padding: 20px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #b3b3b3;
+    color: #333;
+    box-shadow: 0 4px #999;
+    transition: all 0.3s ease;
+  }
+  
+button:active {
+    box-shadow: none;
+    transform: translateY(4px);
+}

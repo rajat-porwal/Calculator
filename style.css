@@ -49,3 +49,15 @@ button:active {
     box-shadow: none;
     transform: translateY(4px);
 }
+
+.oprtrBtn {
+    background-color: #ffb84d;
+  }
+  
+  .calculate {
+    background-color: #4db8ff;
+  }
+  
+  button:hover {
+    background-color: #999;
+  }
